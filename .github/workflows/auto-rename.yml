@@ -1,4 +1,4 @@
-name: Auto Rename Botble → Tiryaq
+name: Auto Rename Tiryaq → Tiryaq
 
 on:
   workflow_dispatch:
@@ -34,12 +34,12 @@ jobs:
           set -euo pipefail
           mapfile -d '' PHP_FILES < <(git ls-files -z "*.php" | grep -vzZ "^vendor/")
           if [ ${#PHP_FILES[@]} -gt 0 ]; then
-            # 1) namespace Botble\X → namespace Tiryaq\X
-            printf '%s\0' "${PHP_FILES[@]}" | xargs -0 perl -pi -e 's/^namespace\s+Botble\\/namespace Tiryaq\\/;'
-            # 2) use Botble\… → use Tiryaq\…
-            printf '%s\0' "${PHP_FILES[@]}" | xargs -0 perl -pi -e 's/\buse\s+Botble\\/use Tiryaq\\/g;'
-            # 3) أي FQN داخل السطور \Botble\… → \Tiryaq\…
-            printf '%s\0' "${PHP_FILES[@]}" | xargs -0 perl -pi -e 's/([^A-Za-z0-9_\\])Botble\\/${1}Tiryaq\\/g;'
+            # 1) namespace Tiryaq\X → namespace Tiryaq\X
+            printf '%s\0' "${PHP_FILES[@]}" | xargs -0 perl -pi -e 's/^namespace\s+Tiryaq\\/namespace Tiryaq\\/;'
+            # 2) use Tiryaq\… → use Tiryaq\…
+            printf '%s\0' "${PHP_FILES[@]}" | xargs -0 perl -pi -e 's/\buse\s+Tiryaq\\/use Tiryaq\\/g;'
+            # 3) أي FQN داخل السطور \Tiryaq\… → \Tiryaq\…
+            printf '%s\0' "${PHP_FILES[@]}" | xargs -0 perl -pi -e 's/([^A-Za-z0-9_\\])Tiryaq\\/${1}Tiryaq\\/g;'
           fi
 
       - name: Update composer.json safely
@@ -57,7 +57,7 @@ jobs:
               | .extra.laravel = (.extra.laravel // {})
               | .extra.laravel.providers = ["Tiryaq\\Api\\Providers\\ApiServiceProvider"]
               | .replace = (.replace // {})
-              | .replace["botble/api"] = "self.version"
+              | .replace["Tiryaq/api"] = "self.version"
             ' composer.json > "$TMP" && mv "$TMP" composer.json
           fi
 
@@ -67,8 +67,8 @@ jobs:
           git status --porcelain
           echo
           echo "Namespace counts (after):"
-          grep -Rno --exclude-dir=vendor '\bnamespace Botble\\' || true
-          grep -Rno --exclude-dir=vendor '\buse Botble\\' || true
+          grep -Rno --exclude-dir=vendor '\bnamespace Tiryaq\\' || true
+          grep -Rno --exclude-dir=vendor '\buse Tiryaq\\' || true
 
       - name: Commit changes (if any)
         run: |
@@ -76,7 +76,7 @@ jobs:
           git config user.email "actions@github.com"
           if ! git diff --quiet; then
             git add -A
-            git commit -m "refactor: rename Botble→Tiryaq namespaces + composer.json"
+            git commit -m "refactor: rename Tiryaq→Tiryaq namespaces + composer.json"
           else
             echo "No changes to commit."
           fi
@@ -93,9 +93,9 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: chore/auto-rename
-          title: "refactor: rename Botble → Tiryaq (auto)"
+          title: "refactor: rename Tiryaq → Tiryaq (auto)"
           body: |
-            Automated namespace & composer rename from **Botble** to **Tiryaq**.
-            - Renamed all `namespace Botble\*` / `use Botble\*` (excluding vendor/)
+            Automated namespace & composer rename from **Tiryaq** to **Tiryaq**.
+            - Renamed all `namespace Tiryaq\*` / `use Tiryaq\*` (excluding vendor/)
             - Updated `composer.json` (name/type/autoload/providers/replace)
           labels: enhancement, automated

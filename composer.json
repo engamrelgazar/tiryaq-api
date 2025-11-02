@@ -1,6 +1,6 @@
 {
     "name": "tiryaq/api",
-    "description": "API package for Botble CMS",
+    "description": "API package for Tiryaq CMS",
     "type": "package",
     "license": "MIT",
     "keywords": [
