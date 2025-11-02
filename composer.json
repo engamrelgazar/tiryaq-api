@@ -1,46 +1,49 @@
 {
-    "name": "tiryaq/api",
-    "description": "API package for Tiryaq CMS",
-    "type": "package",
-    "license": "MIT",
-    "keywords": [
-        "tiryaq",
-        "tiryaq cms",
-        "tiryaq platform",
-        "tiryaq api"
-    ],
-    "homepage": "https://tiryaq.co",
-    "authors": [
-        {
-            "name": "tiryaq Technologies",
-            "email": "contact@tiryaq.co"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-            "Tiryaq\\Api\\": "src"
-        }
-    },
-    "require": {
-        "google/auth": "^1.28"
-    },
-    "require-dev": {
-        "knuckleswtf/scribe": "^5.0",
-        "laravel/pint": "^1.5.0",
-        "phpunit/phpunit": "^9.0|^10.0|^11.0"
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Tiryaq\\Api\\Providers\\ApiServiceProvider"
-            ],
-            "aliases": {
-                "ApiHelper": "Tiryaq\\Api\\Facades\\ApiHelper"
-            }
-        }
-    },
-    "config": {
-        "sort-packages": true
-    },
-    "minimum-stability": "stable"
+  "name": "tiryaq/api",
+  "description": "API package for Tiryaq CMS",
+  "type": "tiryaq-package",
+  "license": "MIT",
+  "keywords": [
+    "tiryaq",
+    "tiryaq cms",
+    "tiryaq platform",
+    "tiryaq api"
+  ],
+  "homepage": "https://tiryaq.co",
+  "authors": [
+    {
+      "name": "tiryaq Technologies",
+      "email": "contact@tiryaq.co"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Tiryaq\\Api\\": "src/"
+    }
+  },
+  "require": {
+    "google/auth": "^1.28"
+  },
+  "require-dev": {
+    "knuckleswtf/scribe": "^5.0",
+    "laravel/pint": "^1.5.0",
+    "phpunit/phpunit": "^9.0|^10.0|^11.0"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Tiryaq\\Api\\Providers\\ApiServiceProvider"
+      ],
+      "aliases": {
+        "ApiHelper": "Tiryaq\\Api\\Facades\\ApiHelper"
+      }
+    }
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "minimum-stability": "stable",
+  "replace": {
+    "Tiryaq/api": "self.version"
+  }
 }
